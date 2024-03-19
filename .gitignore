@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+
+docker-compose.yaml
+backup_script.sh
+Makefile
