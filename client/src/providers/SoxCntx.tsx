@@ -28,13 +28,12 @@ export default function ({ children }: any) {
     //
     //
     // ------------------------------------------------------------------
-    const { takeRes, set_loading } = UseRoot() as RootCntxType;
+    const { takeRes, set_loading, set_userAlerts } = UseRoot() as RootCntxType;
     //
     const [isConnected, setIsConnected] = React.useState<boolean>(false);
     //
     const sxRef = React.useRef<Socket | null>();
     // ------------------------------------------------------------------
-
     //
     //
     function debugSX() {
@@ -42,10 +41,12 @@ export default function ({ children }: any) {
         sxRef.current?.emit(SX.test);
         //
         //
+        console.log("socket - ", sxRef.current);
+        //
+        //
         // ===========================================================
         console.log("\n*********************************************");
         //
-
         const userAlert = sxRef.current?.listeners(SX.userAlert);
         console.log(`SX - [${SX.userAlert}] => `, userAlert);
         //
@@ -69,25 +70,29 @@ export default function ({ children }: any) {
         //
         set_loading(true);
         //
-        const newSocket = io(URL.BASE, {
-            query: { user_id: "jimmy" },
-        });
-        //
-        //
-        console.log("newSocket - ", newSocket);
-        //
-        //
-        newSocket.on(SX.disconnect, () => setIsConnected(false));
-        newSocket.on(SX.connection, () => setIsConnected(true));
-        newSocket.on(SX.test, (data: any) => takeRes(data));
-        //
-        //
-        if (newSocket) {
-            setIsConnected(true);
+        try {
+            //
+            const newSocket = io(URL.BASE, {
+                query: { user_id: "jimbo" },
+            });
+            //
+            newSocket.on(SX.disconnect, () => setIsConnected(false));
+            newSocket.on(SX.connection, () => setIsConnected(true));
+            newSocket.on(SX.test, (data: any) => takeRes(data));
+            //
             sxRef.current = newSocket;
+            setIsConnected(true);
+            //
+        } catch (error:any) {
+            //
+            set_userAlerts([
+                { header: "No socket", details: ["Failed to create websocket", error.message] },
+            ]);
         }
         //
         set_loading(false);
+        //
+        //
     }
     function SX_exit() {
         //

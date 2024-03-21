@@ -11,7 +11,7 @@ export default function App() {
     //
     return (
         <>
-            <div className="P-1 Body1">
+            <div className="P-2 Body1">
                 <div className="Pos-Rel H-100">
                     <Header />
                     <div className="SP-Y-2 Pos-Cen">

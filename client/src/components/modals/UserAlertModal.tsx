@@ -2,8 +2,8 @@
 //
 import React from "react";
 //
-import { FaAngleDoubleLeft, FaCaretRight } from "react-icons/fa";
-import { RES, iconSize } from "../../../../__PKG__/X";
+import { FaCaretRight } from "react-icons/fa";
+import { RES } from "../../../../__PKG__/X";
 //
 //
 function alerts(userAlerts: RES.UserAlert[]) {
@@ -45,9 +45,9 @@ export default function MsgsModal({
     //
     return (
         <div className="Pos-Abs BG-D13 Z90 H-100 W-100">
-            <div className="SP-Y-1 Modal Panel">
-                <button className="RBtn P-05 TopLeftCorner" onClick={close}>
-                    <FaAngleDoubleLeft size={iconSize} />
+            <div className="SP-Y-1 Modal BG-D10">
+                <button className="RBtn Rnd FR P-07 TopLeftCorner" onClick={close}>
+                    X
                 </button>
                 {alerts(userAlerts)}
             </div>
