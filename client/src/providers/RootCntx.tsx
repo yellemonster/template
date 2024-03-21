@@ -18,6 +18,10 @@ function LoadingWall() {
     );
 }
 //
+export enum ViewType {
+    MAIN = "Main",
+}
+export const headerLinks: string[] = Object.values(ViewType);
 //
 export type RootCntxType = {
     //
@@ -29,6 +33,9 @@ export type RootCntxType = {
     //
     userDat: T.UserDat | null;
     set_userDat: (userDat: T.UserDat | null) => void;
+    //
+    viewType: string;
+    set_viewType: (viewType: string) => void;
     //
     userAlerts: RES.UserAlert[];
     set_userAlerts: (userAlerts: React.SetStateAction<RES.UserAlert[]>) => void;
@@ -48,6 +55,7 @@ export default function RootProvider({ children }: any) {
     //
     //
     const [userDat, set_userDat] = React.useState<T.UserDat | null>(null);
+    const [viewType, set_viewType] = React.useState<string>(ViewType.MAIN);
     const [userAlerts, set_userAlerts] = React.useState<RES.UserAlert[]>([]);
     //
     //
@@ -89,6 +97,9 @@ export default function RootProvider({ children }: any) {
                 //
                 userDat,
                 set_userDat,
+                // 
+                viewType,
+                set_viewType,
                 //
                 userAlerts,
                 set_userAlerts,

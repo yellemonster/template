@@ -1,6 +1,7 @@
 //
 //
 import { SoxCntxType, UseSox } from "../providers/SoxCntx";
+import Header from "./Header";
 //
 //
 export default function App() {
@@ -11,20 +12,23 @@ export default function App() {
     return (
         <>
             <div className="P-1 Body1">
-                <div className="SP-X-2 AC">
-                    <div className="FS-3 C-L2">Landing Page</div>
+                <div className="Pos-Rel H-100">
+                    <Header />
+                    <div className="SP-Y-2 Pos-Cen">
+                        <div className="FS-3 C-L2">Landing Page</div>
 
-                    {isConnected ? (
-                        <>
-                            <button className="Btn" onClick={debugSX}>
-                                Test socket
+                        {isConnected ? (
+                            <>
+                                <button className="Btn" onClick={debugSX}>
+                                    Test socket
+                                </button>
+                            </>
+                        ) : (
+                            <button className="Btn" onClick={SX_init}>
+                                Connect socket
                             </button>
-                        </>
-                    ) : (
-                        <button className="Btn" onClick={SX_init}>
-                            Connect socket
-                        </button>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         </>
